@@ -1,0 +1,44 @@
+# Sub-dimensions score 0/1/2. Dimension = 1 + 4 * earned / possible (1.0-5.0).
+# A memo passes only when BOTH judges clear pass_mark on every dimension
+# and neither gives 0 on a critical sub-dimension.
+pass_mark: 4.0
+max_attempts: 5
+reputable: [sec.gov, federalreserve.gov, stlouisfed.org, bls.gov, bea.gov, treasury.gov, reuters.com, wsj.com, ft.com, bloomberg.com]
+mandate: {max_position_pct: 12, max_sector_pct: 25, margin_of_safety: 0.15}
+dimensions:
+  grounded_decisions:
+    weight: 1
+    subs:
+      no_jumps: {desc: "Every inference and conclusion rests on stated facts or figures; no leaps."}
+      corroborated: {desc: "Facts come from filings or two independent reputable sources."}
+      subagents_vetted: {desc: "Each sub-agent output was checked by a different agent before use."}
+  data_integrity:
+    weight: 1
+    subs:
+      tie_out: {desc: "Statements balance and cash flow reconciles.", critical: true}
+      audited_labelled: {desc: "Audited and unaudited figures are labelled correctly."}
+      traceable: {desc: "Every figure matches a filing or recomputes from ones that do.", critical: true}
+  analytical_depth:
+    weight: 1
+    subs:
+      coverage: {desc: "Growth, margins, returns, leverage, cash conversion, earnings quality all covered with figures."}
+      peers_justified: {desc: "5-10 peers, each with a stated reason."}
+      trends_explained: {desc: "Multi-period trends are explained, not just listed."}
+  valuation_soundness:
+    weight: 1
+    subs:
+      assumptions_explicit: {desc: "Growth, margin, WACC, terminal growth stated with rationale and basis."}
+      scenarios: {desc: "Bear/base/bull ordered, probabilities sum to 1, expected value correct."}
+      cross_checked: {desc: "At least two valuation methods, gap explained."}
+  risk_discipline:
+    weight: 1
+    subs:
+      mandate_fit: {desc: "Position within size and sector limits, no margin.", critical: true}
+      downside_quantified: {desc: "Each risk carries a quantified downside."}
+      thesis_breakers: {desc: "At least two specific, measurable thesis-breakers."}
+  clarity:
+    weight: 1
+    subs:
+      clear_verdict: {desc: "Verdict is explicit and consistent with the margin of safety."}
+      plain_language: {desc: "Summary is short and readable."}
+      change_my_mind: {desc: "States what would change the view."}

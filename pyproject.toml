@@ -1,0 +1,16 @@
+[project]
+name = "pfm"
+version = "0.1.0"
+description = "Personal fund manager: statements, analysis, dual-judge evaluation, team benchmark"
+requires-python = ">=3.11"
+dependencies = ["pydantic>=2", "pyyaml", "httpx"]
+
+[project.optional-dependencies]
+llm = ["anthropic"]
+dev = ["pytest"]
+
+[project.scripts]
+pfm = "pfm.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["pfm*"]
